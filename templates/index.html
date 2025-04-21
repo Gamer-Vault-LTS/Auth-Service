@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GAMER VAULT LTS</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="https://d1th0hc7ymkxpv.cloudfront.net/gamervault.png" type="image/x-icon">
+    <style>
+      :root {
+        --primary: #DEAD1C;
+        --secondary: #295280;
+        --dark: #041637;
+        --light: #e0e0e0;
+        --accent: #6a0c96;
+        --bg-gradient: linear-gradient(200deg, #041637 20%, #295280 100%);
+      }
+      body {
+        font-family: "Roboto", sans-serif;
+        margin: 0;
+        padding: 0;
+        background: var(--bg-gradient);
+        color: var(--light);
+        min-height: 100vh;
+      }
+      .pixel-font {
+        font-family: "Press Start 2P", cursive;
+        text-transform: uppercase;
+      }
+      header {
+        background: rgba(0, 0, 0, 0.3);
+        padding: 1rem;
+        text-align: center;
+      }
+      .logo {
+        font-size: 2rem;
+        margin: 0;
+        color: var(--primary);
+        text-shadow: 0 0 10px var(--primary), 0 0 20px rgba(238, 255, 0, 0.815);
+        letter-spacing: 2px;
+      }
+      .tagline {
+        color: var(--secondary);
+        font-size: 0.8rem;
+        margin-top: 0;
+        text-shadow: 0 0 5px var(--secondary);
+      }
+
+      .hero {
+        text-align: center;
+        padding: 4rem 1rem;
+        position: relative;
+      }
+      .hero h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.5;
+        color: var(--primary);
+      }
+      .btn-dead1c {
+        display: inline-block;
+        padding: 0.8rem 1.5rem;
+        margin: 0.5rem;
+        background: rgba(0, 0, 0, 0.5);
+        color: var(--primary);
+        text-decoration: none;
+        border: 1px solid var(--primary);
+        font-family: "Press Start 2P", cursive;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s;
+      }
+      .btn-dead1c:hover {
+        background: rgba(0, 255, 157, 0.2);
+        box-shadow: 0 0 10px var(--primary), inset 0 0 5px var(--primary);
+        color: #fff;
+      }
+      .btn-dead1c::before {
+        content: ">";
+        position: absolute;
+        left: 10px;
+        opacity: 0;
+        transition: all 0.3s;
+      }
+      .btn-dead1c:hover::before {
+        opacity: 1;
+        left: 5px;
+      }
+      .btn-dead1c::after {
+        content: "<";
+        position: absolute;
+        right: 10px;
+        opacity: 0;
+        transition: all 0.3s;
+      }
+      .btn-dead1c:hover::after {
+        opacity: 1;
+        right: 5px;
+      }
+
+      footer {
+        text-align: center;
+        padding: 2rem;
+        background: rgba(0, 0, 0, 0.5);
+        font-size: 0.7rem;
+      }
+      .glitch {
+        animation: glitch-effect 2s infinite linear;
+      }
+      @keyframes glitch-effect {
+        0% {
+          text-shadow: 0 0 var(--primary);
+        }
+        25% {
+          text-shadow: -2px 0 var(--accent), 2px 0 var(--secondary);
+        }
+        50% {
+          text-shadow: 3px 0 var(--accent), -3px 0 var(--secondary);
+        }
+        75% {
+          text-shadow: -1px 0 var(--accent), 1px 0 var(--secondary);
+        }
+        100% {
+          text-shadow: 0 0 var(--primary);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+     
+      <h1 class="logo pixel-font glitch">GAMER VAULT LTS</h1>
+    </header>
+    
+    <section class="hero">
+      <div class="hero-content">
+        <img src="https://d1th0hc7ymkxpv.cloudfront.net/gamervault.png" alt="logo gv" width="200" >
+        <h1 class="pixel-font">
+          API <span class="glitch">DOCUMENTATION</span>
+        </h1>
+        <div>
+          <a href="/docs" class="btn-dead1c">DOCUMENTATION</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="pixel-font">
+      <p>© 2025 GAMER VAULT</p>
+    </footer>
+  </body>
+</html>

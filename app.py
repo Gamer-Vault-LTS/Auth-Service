@@ -1,6 +1,6 @@
 from flask import Flask, g, jsonify, render_template, send_from_directory
 from flask_swagger_ui import get_swaggerui_blueprint
-from routes import Auth
+from routes import Auth, Users
 from flask_cors import CORS
 from utils.db import get_db
 
@@ -16,6 +16,7 @@ swaggerui_blueprint = get_swaggerui_blueprint(
     }
 )
 app.register_blueprint(Auth.auth_route)
+app.register_blueprint(Users.user_route)
 app.register_blueprint(swaggerui_blueprint, url_prefix='/docs')
 @app.route('/')
 def home():

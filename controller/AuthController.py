@@ -60,7 +60,7 @@ class AuthController:
             g.db.commit()
             g.db.refresh(user)
             
-            newCart = ShoppingCart(user_id=user.user_id)
+            newCart = ShoppingCart(user_id=user.user_id, products=[])
             g.db.add(newCart)
             g.db.commit()
             

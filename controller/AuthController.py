@@ -17,15 +17,15 @@ class AuthController:
         user = g.db.query(User).filter_by(username= username).first()
         
         if not user:
-            return jsonify({"message": "Unregistered User"}), 401
+            return jsonify({"error": "Unregistered User"}), 401
         
         if user.is_active == False:
-            return jsonify({"message": "This user is deactivated"}), 401
+            return jsonify({"error": "This user is deactivated"}), 401
         
         validate = sc.verify_password(password,user.password_hash)
         
         if not validate or user.username != username:
-            return jsonify({"message": "Registered password or unregistered user"}), 401
+            return jsonify({"error": "Registered password or unregistered user"}), 401
         else:
             token = jwt.encode({'user_id': user.user_id}, 'ggeasy', algorithm='HS256')
             return jsonify({"token": token}), 200
@@ -97,7 +97,7 @@ class AuthController:
 
         
         if not user:
-            return jsonify({"message": "Unregistered User"}), 401
+            return jsonify({"error": "Unregistered User"}), 401
         
         if current_password == new_password:
             return jsonify({'error': 'New password cannot be the same as the current password'}), 401
@@ -108,7 +108,7 @@ class AuthController:
         validate = sc.verify_password(current_password,user.password_hash)
         
         if not validate:
-            return jsonify({"message": "The current password is incorrect"}), 401
+            return jsonify({"error": "The current password is incorrect"}), 401
       
         password_hash = sc.hash_password(new_password)
         
@@ -128,7 +128,7 @@ class AuthController:
         user = g.db.query(User).filter_by(user_id=user_id).first()
         
         if not user:
-            return jsonify({"message": "Unregistered User"}), 401
+            return jsonify({"error": "Unregistered User"}), 401
         
         user.is_active = False
         g.db.commit()
@@ -145,7 +145,7 @@ class AuthController:
         user = g.db.query(User).filter_by(user_id=user_id).first()
         
         if not user:
-            return jsonify({"message": "Unregistered User"}), 401
+            return jsonify({"error": "Unregistered User"}), 401
         
         g.db.delete(user)
         g.db.commit()

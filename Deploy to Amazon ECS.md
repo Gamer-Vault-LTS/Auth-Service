@@ -1,4 +1,53 @@
-name: Deploy to Amazon ECS
+# Deploy to Amazon ECS service with GitHub Actions workflow 
+## **1️⃣ Estructura de capetas para el despliegue**
+
+ ┣  📂 .aws/**main-auth-service-task-def.json**  
+ ```code
+ {
+    "family": "main-auth-service-task-def",
+    "networkMode": "awsvpc",
+    "executionRoleArn": "arn:aws:iam::862695242185:role/ecsTaskExecutionRole",
+    "taskRoleArn": "arn:aws:iam::862695242185:role/ecsTaskExecutionRole",
+    "containerDefinitions": [
+      {
+        "name": "AuthService",
+        "image": "REPLACE_IMAGE",
+        "portMappings": [
+          {
+            "containerPort": 5000,
+            "hostPort": 5000,
+            "protocol": "tcp",
+            "appProtocol": "http"
+          }
+        ],
+        "essential": true,
+        "logConfiguration": {
+          "logDriver": "awslogs",
+          "options": {
+            "awslogs-group": "/ecs/main-auth-service-task-def",
+            "awslogs-region": "us-east-1",
+            "awslogs-stream-prefix": "ecs",
+            "mode": "non-blocking",
+            "awslogs-create-group": "true",
+            "max-buffer-size": "25m"
+          }
+        }
+      }
+    ],
+    "requiresCompatibilities": [ "FARGATE" ],
+    "cpu": "1024",
+    "memory": "3072",
+    "runtimePlatform": {
+      "cpuArchitecture": "X86_64",
+      "operatingSystemFamily": "LINUX"
+    }
+  }
+  
+ ```
+ ┣  📂 .github/workflows/**GitHubDeploytoAmazonECS.yml**
+ 
+ ```code
+ name: Deploy to Amazon ECS
 
 on:
   push:
@@ -64,3 +113,7 @@ jobs:
         service: ${{ env.ECS_SERVICE }}
         cluster: ${{ env.ECS_CLUSTER }}
         wait-for-service-stability: true
+
+ ```
+
+![Deploy to Amazon ECS](./PIPELINE.png)

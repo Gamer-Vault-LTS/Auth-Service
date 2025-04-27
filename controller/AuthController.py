@@ -18,6 +18,10 @@ class AuthController:
         
         if not user:
             return jsonify({"message": "Unregistered User"}), 401
+        
+        if user.is_active == False:
+            return jsonify({"message": "This user is deactivated"}), 401
+        
         validate = sc.verify_password(password,user.password_hash)
         
         if not validate or user.username != username:
@@ -73,3 +77,78 @@ class AuthController:
             return jsonify({'error': str(e)}), 500
         
         return jsonify({'message': 'Registered successfully'}), 201
+    
+    def change_password(data):
+        data = request.json
+        if not data:
+            return jsonify({'error': 'No data provided'}), 401
+        required = ['user_id', 'current_password', 'new_password', 'password_confirm']
+        
+        for field in required:
+            if field not in data or not data[field]:
+                return jsonify({'error': f'{field} required'}), 401
+        
+        user_id = data['user_id']
+        current_password = data['current_password']
+        new_password = data['new_password']
+        password_confirm = data['password_confirm']
+
+        user = g.db.query(User).filter_by(user_id=user_id).first()
+
+        
+        if not user:
+            return jsonify({"message": "Unregistered User"}), 401
+        
+        if current_password == new_password:
+            return jsonify({'error': 'New password cannot be the same as the current password'}), 401
+        
+        if new_password != password_confirm:
+            return jsonify({'error': 'New passwords do not match'}), 401
+        
+        validate = sc.verify_password(current_password,user.password_hash)
+        
+        if not validate:
+            return jsonify({"message": "The current password is incorrect"}), 401
+      
+        password_hash = sc.hash_password(new_password)
+        
+        user.password_hash = password_hash
+        g.db.commit()
+        
+        return jsonify({'message': 'Password changed successfully'}), 200
+    
+    
+    def deactivate_user(data):
+        data = request.json
+        user_id = data['user_id']
+        
+        if not user_id:
+            return jsonify({'error': 'No user provided'}), 400
+        
+        user = g.db.query(User).filter_by(user_id=user_id).first()
+        
+        if not user:
+            return jsonify({"message": "Unregistered User"}), 401
+        
+        user.is_active = False
+        g.db.commit()
+        
+        return jsonify({'message': 'User deactivated successfully'}), 200
+    
+    def delete_user(data):
+        data = request.json
+        user_id = data['user_id']
+        
+        if not user_id:
+            return jsonify({'error': 'No user provided'}), 400
+        
+        user = g.db.query(User).filter_by(user_id=user_id).first()
+        
+        if not user:
+            return jsonify({"message": "Unregistered User"}), 401
+        
+        g.db.delete(user)
+        g.db.commit()
+        
+        return jsonify({'message': 'User deleted successfully'}), 200
+        

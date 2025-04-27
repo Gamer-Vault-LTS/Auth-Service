@@ -20,3 +20,18 @@ def login():
 def register():
     data = request.json
     return auth.register(data)
+
+@auth_route.route('/auth/changepassword', methods=['POST'])
+def change_password():
+    data = request.json
+    return auth.change_password(data)
+
+@auth_route.route('/auth/deactivateuser', methods=['POST'])
+def deactivate_user():
+    data = request.json 
+    return auth.deactivate_user(data)
+
+@auth_route.route('/auth/deleteuser', methods=['POST'])
+def delete_user():
+    data = request.json 
+    return auth.delete_user(data)

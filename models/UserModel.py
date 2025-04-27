@@ -11,6 +11,7 @@ class User(Base):
     phone = Column(String(20), nullable=True)
     birth_date = Column(Date, nullable=True)
     created_at = Column(TIMESTAMP, server_default='CURRENT_TIMESTAMP')
+    is_active = Column(Boolean, default=True)
     avatar = Column(String(255), nullable=True)
     
     def serialize(self):

@@ -50,7 +50,7 @@ def verify_db_connection():
     try:
         with engine.connect() as conn:
             conn.execute(text("SELECT 1"))
-        log.info("Conexion exitosa")
+            log.info("Conexion exitosa")
         return True
     except Exception as e:
         log.critical(f"No se pudo conectar a la base de datos: {str(e)}")

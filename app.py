@@ -3,6 +3,7 @@ from flask_swagger_ui import get_swaggerui_blueprint
 from routes import Auth, Users
 from flask_cors import CORS
 from utils.db import get_db
+from utils.security import SecurityUserController
 
 
 
@@ -22,6 +23,9 @@ app.register_blueprint(swaggerui_blueprint, url_prefix='/docs')
 def home():
     return render_template('index.html')
 
+@app.route('/token')
+def token():
+    return SecurityUserController.generar_token_authorizer('22480e7a-4755-46b0-9cfb-983d2a56c348')
 @app.route('/health')
 def health_check():
     return jsonify({"status": "healthy"}), 200
@@ -42,5 +46,5 @@ def teardown_request(exception=None):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000,debug=True)
+    app.run(host="0.0.0.0", port=5000)
     

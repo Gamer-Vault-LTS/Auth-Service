@@ -27,7 +27,7 @@ class AuthController:
         if not validate or user.username != username:
             return jsonify({"error": "Registered password or unregistered user"}), 401
         else:
-            token = jwt.encode({'user_id': user.user_id}, 'ggeasy', algorithm='HS256')
+            token = sc.generar_token_authorizer(user.user_id)
             return jsonify({"token": token}), 200
 
 

@@ -8,7 +8,7 @@ class UsersController:
     def get_user(db:Session):
         user= db.query(User).all()
         if not user:
-            return jsonify({"message": "There are no users is empty"}), 404
+            return jsonify({"error": "There are no users is empty"}), 404
         return jsonify([user.serialize() for user in user]), 200
     
     
@@ -16,6 +16,20 @@ class UsersController:
         user= db.query(User).where(User.user_id == user_id).first()
         
         if not user:
-            return jsonify({"message": "User not found"}), 404
+            return jsonify({"error": "User not found"}), 404
         return jsonify(user.serialize()), 200
     
+    def getUserLevel(db:Session,user_id):
+        user= db.query(User).where(User.user_id == user_id).first()
+        
+        if not user:
+            return jsonify({"error": "User not found"}), 404
+        
+        user_level = user.challenge_level_id    
+        user_progress = user.challenge_progress
+        
+        response = {
+            "user_level": user_level,
+            "user_progress": user_progress
+        }
+        return jsonify(response), 200

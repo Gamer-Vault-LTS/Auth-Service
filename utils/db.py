@@ -22,15 +22,10 @@ def getSecretManagerDB():
         return None
     
 
-# db_credentials = getSecretManagerDB()
-# DB_HOST = "cluster-gamer-vault-instance-1.c6r6ws4k4vwo.us-east-1.rds.amazonaws.com"
-# DB_USER = db_credentials["username"]
-# DB_PASS = db_credentials["password"]
-# DB_NAME = 'gamervaultlts'
-
-DB_HOST = "localhost:8400"
-DB_USER = "admin"
-DB_PASS = ">fc-liyYi[v4Dlh6Pc0m_FwZ>pE#"
+db_credentials = getSecretManagerDB()
+DB_HOST = "cluster-gamer-vault-instance-1.c6r6ws4k4vwo.us-east-1.rds.amazonaws.com"
+DB_USER = db_credentials["username"]
+DB_PASS = db_credentials["password"]
 DB_NAME = 'gamervaultlts'
 
 DATABASE_URL = f"mysql+mysqlconnector://{DB_USER}:{DB_PASS}@{DB_HOST}/{DB_NAME}"

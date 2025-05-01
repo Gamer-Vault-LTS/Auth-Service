@@ -28,10 +28,8 @@ class UsersController:
         
         if not data["user_id"]:
             return jsonify({'error': 'No user id provided'}), 400
-        print("recibi datos")
         user_id = data["user_id"]  
         user = g.db.query(User).filter_by(user_id=user_id).first()
-        print("encontre usuario")
         if not user:
             return jsonify({"error": "User not found"}), 404
         

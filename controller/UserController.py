@@ -19,8 +19,18 @@ class UsersController:
             return jsonify({"error": "User not found"}), 404
         return jsonify(user.serialize()), 200
     
-    def getUserLevel(db:Session,user_id):
-        user= db.query(User).where(User.user_id == user_id).first()
+    def getUserLevel(data):
+        
+        data = request.jason
+        
+        if not data:
+            return jsonify({'error': 'No data provided'}), 400
+        
+        if not data["user_id"]:
+            return jsonify({'error': 'No user id provided'}), 400
+        
+        user_id = data["user_id"]  
+        user = g.db.query(User).filter_by(user_id=user_id).first()
         
         if not user:
             return jsonify({"error": "User not found"}), 404
@@ -32,4 +42,5 @@ class UsersController:
             "user_level": user_level,
             "user_progress": user_progress
         }
+        
         return jsonify(response), 200

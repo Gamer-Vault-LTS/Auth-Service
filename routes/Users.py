@@ -16,6 +16,7 @@ def getUsersEndpoint():
 def getUserByIdEndpoint(user_id):
     return ucontroller.getUserById(g.db,user_id)
 
-@user_route.route("/users/<user_id>/level",methods=['POST'])    
-def getUserLevelEndpoint(user_id):
-    return ucontroller.getUserLevel(g.db,user_id)
+@user_route.route("/users/getlevel",methods=['POST'])    
+def getUserLevelEndpoint():
+    data = request.json 
+    return ucontroller.getUserLevel(data)

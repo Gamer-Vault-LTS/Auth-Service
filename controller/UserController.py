@@ -1,5 +1,6 @@
 import jwt
 from models.UserModel import User  
+from models.ChallengeLevelModel import ChallengeLevels
 from flask import request,g, jsonify
 from sqlalchemy.orm import Session
 
@@ -28,17 +29,28 @@ class UsersController:
         
         if not data["user_id"]:
             return jsonify({'error': 'No user id provided'}), 400
+        
         user_id = data["user_id"]  
+        
         user = g.db.query(User).filter_by(user_id=user_id).first()
+        
         if not user:
             return jsonify({"error": "User not found"}), 404
         
         user_level = user.challenge_level_id    
-        user_progress = user.challenge_progress
+        user_progress = user.challenge_progress 
+        
+        level = g.db.query(ChallengeLevels).filter_by(level_id=user_level).first()
+        
+        if not level:
+            return jsonify({"error": "Level not found"}), 404
+        
+        user_level_name = level.level_name
         
         response = {
             "user_level": user_level,
-            "user_progress": user_progress
+            "user_progress": user_progress,
+            "user_level_name": user_level_name
         }
         
         return jsonify(response), 200

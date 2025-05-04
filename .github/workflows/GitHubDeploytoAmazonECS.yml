@@ -7,7 +7,7 @@ on:
 env:
     AWS_REGION: us-east-1
     ECR_REPOSITORY: auth_services_repo
-    ECS_SERVICE: auth-service
+    ECS_SERVICE: auth-service-gvgg
     ECS_CLUSTER: main-cluster-gamer-vault-ggeasy
     ECS_TASK_DEFINITION: .aws/main-auth-service-task-def.json
     CONTAINER_NAME: AuthService

@@ -13,8 +13,8 @@ class User(Base):
     created_at = Column(TIMESTAMP, server_default='CURRENT_TIMESTAMP')
     is_active = Column(Boolean, default=True)
     avatar = Column(String(255), nullable=True)
-    challenge_level_id = Column(Integer, nullable=True)
-    challenge_progress = Column(Integer, nullable=True)
+    challenge_level_id = Column(Integer, nullable=False, default=0)
+    challenge_progress = Column(Integer, nullable=False, default=0)
     
     def serialize(self):
         return {

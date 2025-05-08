@@ -9,7 +9,7 @@ import logging
 log = logging.getLogger(__name__)
 
 def getSecretManagerDB():
-    secret_name = "rds!cluster-9b4b7cd8-22ee-48ff-bbc4-d1f43ddf3bc8"
+    secret_name = "rds!cluster-5dfd2241-8741-4a10-a2d6-6f6edf581769"
     region_name = "us-east-1"   
     
     try:
@@ -23,10 +23,10 @@ def getSecretManagerDB():
     
 
 db_credentials = getSecretManagerDB()
-DB_HOST = "cluster-gamer-vault-instance-1.c6r6ws4k4vwo.us-east-1.rds.amazonaws.com"
+DB_HOST = "db-gamer-vault-instance-1.c6r6ws4k4vwo.us-east-1.rds.amazonaws.com"
 DB_USER = db_credentials["username"]
 DB_PASS = db_credentials["password"]
-DB_NAME = 'gamervaultlts'
+DB_NAME = 'gamervault'
 
 DATABASE_URL = f"mysql+mysqlconnector://{DB_USER}:{DB_PASS}@{DB_HOST}/{DB_NAME}"
 engine = create_engine(DATABASE_URL)

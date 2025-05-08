@@ -23,7 +23,6 @@ class User(Base):
         'last_name': self.last_name,
         'username': self.username,
         'email': self.email,
-        "password_hash": self.password_hash,
         'phone': self.phone,
         'birth_date': self.birth_date,
         'created_at': self.created_at,

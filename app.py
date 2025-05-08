@@ -5,6 +5,9 @@ from flask_cors import CORS
 from utils.db import get_db
 from utils.security import SecurityUserController
 
+import logging
+logger = logging.getLogger(__name__)
+
 
 
 app = Flask(__name__)
@@ -25,6 +28,7 @@ def home():
 
 @app.route('/token')
 def token():
+    logger.info('token')
     return SecurityUserController.generar_token_authorizer('22480e7a-4755-46b0-9cfb-983d2a56c348')
 @app.route('/health')
 def health_check():

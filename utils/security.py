@@ -1,7 +1,6 @@
 from functools import wraps
 import jwt
 import datetime
-import pytz
 import bcrypt
 from flask import request, jsonify
 
@@ -50,7 +49,7 @@ class SecurityUserController:
     
     @staticmethod
     def generar_token_authorizer(user_id:str, secret_key:str = 'ggeasy', expiracion:int=30):
-        utc_now = datetime.datetime.now(pytz.utc)
+        utc_now = datetime.datetime.utcnow()
         
         payload = {
             'sub': user_id,

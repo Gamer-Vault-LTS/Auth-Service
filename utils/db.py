@@ -55,6 +55,3 @@ def verify_db_connection():
     except Exception as e:
         log.critical(f"No se pudo conectar a la base de datos: {str(e)}")
         return False
-    
-    
-verify_db_connection()

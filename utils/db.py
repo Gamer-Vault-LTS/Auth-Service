@@ -23,7 +23,7 @@ def getSecretManagerDB():
     
 
 db_credentials = getSecretManagerDB()
-DB_HOST = "db-gamer-vault-instance-1.c6r6ws4k4vwo.us-east-1.rds.amazonaws.com"
+DB_HOST = "db-gamer-vault-instance-1-us-east-1b.c6r6ws4k4vwo.us-east-1.rds.amazonaws.com"
 DB_USER = db_credentials["username"]
 DB_PASS = db_credentials["password"]
 DB_NAME = 'gamervault'
